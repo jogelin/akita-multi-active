@@ -11,7 +11,8 @@ export class ContactsService {
   }
 
   setActiveContact(contactIDS: IDS): void {
-    this.contactsStore.setActive(contactIDS);
+    // TS2345: Argument of type 'IDS' is not assignable to parameter of type 'ID[]'.   Type 'string' is not assignable to type 'ID[]'.
+    // this.contactsStore.setActive(contactIDS);
   }
 
   removeActiveContact(contactIDS: IDS): void {
