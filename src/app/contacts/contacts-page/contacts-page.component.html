@@ -1,5 +1,1 @@
-<ul class="list-group mt-10">
-  <li class="list-group-item" *ngFor="let contact of (contacts$ | async)"
-      [class.active]="isActive(contact.id)"
-      (click)="toggleActive(contact.id)">{{ contact.name }}</li>
-</ul>
+ID: {{(contact$ | async).id}}

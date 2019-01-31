@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactsQuery } from '../state/contacts.query';
+import { ContactsService } from '../state/contacts.service';
 import { Observable } from 'rxjs';
 import { Contact } from '../state/contact.model';
-import { ID } from '@datorama/akita';
-import { ContactsService } from '../state/contacts.service';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contacts-page',
@@ -11,19 +11,18 @@ import { ContactsService } from '../state/contacts.service';
   styleUrls: ['./contacts-page.component.css']
 })
 export class ContactsPageComponent implements OnInit {
-  contacts$: Observable<Contact[]>;
 
-  constructor(private contactsQuery: ContactsQuery, private contactsService: ContactsService) {}
+  contact$: Observable<Contact>;
+
+  constructor(private contactsQuery: ContactsQuery, private contactsService: ContactsService) {
+  }
 
   ngOnInit() {
-    this.contacts$ = this.contactsQuery.selectAll();
+    this.contactsQuery.selectFirst().subscribe(contact => this.contactsService.addActivePlan(contact.id));
+    this.initObs$();
   }
 
-  toggleActive(id: ID) {
-    this.contactsService.toggleActive(id);
-  }
-
-  isActive(id: ID) {
-    return this.contactsQuery.hasActive(id);
+  private initObs$() {
+    this.contact$ = this.contactsQuery.selectActive().pipe(tap(console.log), map(plans => plans[0]));
   }
 }

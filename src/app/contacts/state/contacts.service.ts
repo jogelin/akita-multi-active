@@ -1,12 +1,20 @@
 import { Injectable } from '@angular/core';
 import { ContactsStore } from './contacts.store';
-import { ID } from '@datorama/akita';
+import { IDS } from '@datorama/akita';
 
 @Injectable({ providedIn: 'root' })
 export class ContactsService {
   constructor(private contactsStore: ContactsStore) {}
 
-  toggleActive(id: ID) {
-    this.contactsStore.toggleActive(id);
+  addActivePlan(contactIDS: IDS): void {
+    this.contactsStore.addActive(contactIDS);
+  }
+
+  setActivePlan(contactIDS: IDS): void {
+    this.contactsStore.setActive(contactIDS);
+  }
+
+  removeActivePlan(contactIDS: IDS): void {
+    this.contactsStore.removeActive(contactIDS);
   }
 }
