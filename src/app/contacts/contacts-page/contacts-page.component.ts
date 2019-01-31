@@ -3,7 +3,7 @@ import { ContactsQuery } from '../state/contacts.query';
 import { ContactsService } from '../state/contacts.service';
 import { Observable } from 'rxjs';
 import { Contact } from '../state/contact.model';
-import { map, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contacts-page',
@@ -23,6 +23,9 @@ export class ContactsPageComponent implements OnInit {
   }
 
   private initObs$() {
-    this.contact$ = this.contactsQuery.selectActive().pipe(tap(console.log), map(plans => plans[0]));
+    this.contact$ = this.contactsQuery.selectActive().pipe(
+      filter(contacts => contacts.length > 0),
+      tap(console.log),
+      map(contacts => contacts[0]));
   }
 }
