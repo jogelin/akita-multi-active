@@ -6,15 +6,15 @@ import { IDS } from '@datorama/akita';
 export class ContactsService {
   constructor(private contactsStore: ContactsStore) {}
 
-  addActivePlan(contactIDS: IDS): void {
+  addActiveContact(contactIDS: IDS): void {
     this.contactsStore.addActive(contactIDS);
   }
 
-  setActivePlan(contactIDS: IDS): void {
+  setActiveContact(contactIDS: IDS): void {
     this.contactsStore.setActive(contactIDS);
   }
 
-  removeActivePlan(contactIDS: IDS): void {
+  removeActiveContact(contactIDS: IDS): void {
     this.contactsStore.removeActive(contactIDS);
   }
 }

@@ -18,7 +18,7 @@ export class ContactsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.contactsQuery.selectFirst().subscribe(contact => this.contactsService.addActivePlan(contact.id));
+    this.contactsQuery.selectFirst().subscribe(contact => this.contactsService.addActiveContact(contact.id));
     this.initObs$();
   }
 
